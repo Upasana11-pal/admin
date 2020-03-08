@@ -104,6 +104,20 @@ class Welcome extends CI_Controller {
 	                
 	                endforeach;
 	        }
+	        public function noticeBoard(){
+	        	$data = array(
+	        			'subject' => $this->input->post("title"),
+	        			'message' => $this->input->post("content"),
+	        			'date' => date("Y-m-d")
+	        	);
+	        	if($this->db->insert("notice",$data)){
+	        		redirect(base_url()."index.php/login/noticeBoard");
+	        	}
+	        	else{
+	        		echo "Somthing going wrong. Please Contact Site administrator";
+	        	}
+	        }
+	        
 }
 
 /* End of file welcome.php */

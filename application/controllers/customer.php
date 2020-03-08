@@ -19,6 +19,15 @@ class customer extends CI_Controller{
 			redirect("welcome/lockPage");
 		}
 	}
+		public function deleteNews(){
+		$this->db->where("id",$this->uri->segment(3));
+		if($this->db->delete("latestnews")){
+			redirect(base_url()."index.php/login/latestnews");
+		}
+		else{
+			echo "Somthing going wrong. Please Contact Site administrator";
+		}
+	}
 	function customer_list(){
 		$uriv = $this->uri->segment(3);
 		if($uriv==1){
@@ -99,19 +108,6 @@ class customer extends CI_Controller{
 			if($dt){
 			  redirect("clogin/customer_profile");
 			}
-				
-	  
-
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+			
 	}
 }

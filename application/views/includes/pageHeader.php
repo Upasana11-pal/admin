@@ -47,17 +47,15 @@
         </div>
         
         <ul class="navbar-nav navbar-right">
-         
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <li class="dropdown"><a href="#" data-toggle="dropdown"
+ <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> 
               <?php if(strlen($this->session->userdata('image'))>0){?>
-              <img alt="image" src="<?php echo base_url();?>assets/img/<?php echo $this->session->userdata('image');?>"
+              <img alt="image" src="<?php echo base_url();?>assets/img/<?php echo $this->session->userdata('image');?>"/>
               <?php }else {?>
-              <img alt="image" src="<?php echo base_url();?>assets/img/default.jpg">
+            <img alt="image" src="<?php echo base_url();?>assets/img/default.jpg" />
               
               <?php }?>
-                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+                <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello <?php echo $this->session->userdata("name");?></div>
                <?php if($this->session->userdata("login_type")==1){ ?>

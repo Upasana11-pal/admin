@@ -23,7 +23,7 @@
 |
 */
 
-$config['base_url'] = 'http://localhost/nisha';
+$config['base_url'] = 'http://localhost/admin/';
 
 //$config['base_url'] = 'http://localhost/umpl.in/usoft/';
 

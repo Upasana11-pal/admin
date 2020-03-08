@@ -10,6 +10,7 @@ class Login extends CI_Controller{
 		$is_login = $this->session->userdata('is_login');
 		$is_lock = $this->session->userdata('is_lock');
 		$logtype = $this->session->userdata('login_type');
+	
 		if($logtype != 1){
 			//echo $is_login;
 			redirect("welcome/index");
@@ -243,8 +244,6 @@ class Login extends CI_Controller{
         	$data['subPage'] = 'Gallery';
         
         	$data['title'] = 'Gallery';
-        	
-        
         	$data['headerCss'] = 'headerCss/dashboardCss';
         	$data['footerJs'] = 'footerJs/dashboardJs';
         	$data['mainContent'] = 'gallery';
@@ -304,6 +303,71 @@ class Login extends CI_Controller{
         	$data['mainContent'] = 'generatebill';
         	$this->load->view("includes/mainContent", $data);
         
-        }
+        } 
+        function saveGallery(){
+	$photo_name = time().trim($_FILES['selectedStu']['name']);
+	$name= $this->input->post('selectedStu');
+	 //echo $name;
+	$data=array(
+			'name'=>$this->input->post("title"),
+			'image'=>$photo_name,
+			'date'=>date("Y-m-d")
+	);
+	$query = $this->db->insert("gallery",$data);
+	if($query){
+		$this->load->library('upload');
+		$image_path = realpath(APPPATH . '../assets/images');
+		$data['upload_path'] = $image_path;
+		$data['allowed_types'] = 'gif|jpg|jpeg|png';
+		$data['max_size'] = '1000';
+		$data['file_name'] = $photo_name;
+	}
+	if (!empty($_FILES['selectedStu']['name'])) {
+		$this->upload->initialize($data);
+		$this->upload->do_upload('selectedStu');
+		echo "ho gya";
+			
+		redirect(base_url()."index.php/login/gallery");
+		//echo $image_path;
+	}
+	else{
+		echo "Somthing going wrong. Please Contact Site administrator";
+	}
+}
        
+
+public function deleteGallery(){
+	$this->db->where("id",$this->uri->segment(3));
+	if($this->db->delete("gallery")){
+		redirect(base_url()."index.php/login/gallery");
+	}
+	else{
+		echo "Somthing going wrong. Please Contact Site administrator";
+	}
+}
+public function editHeadline(){
+	$data = array(
+			"subject" => $this->input->post("title"),
+			"message" => $this->input->post("content"),
+			"date" => date("Y-m-d")
+	);
+	$this->db->where("id",$this->input->post("id"));
+	if($this->db->update("notice",$data)){
+		redirect(base_url()."index.php/login/noticeBoard");
+	}
+	else{
+		echo "Somthing going wrong. Please Contact Site administrator";
+	}
+}
+public function deleteHeadline(){
+	$this->db->where("id",$this->uri->segment(3));
+	if($this->db->delete("notice")){
+		redirect(base_url()."index.php/login/noticeBoard");
+	}
+	else{
+		echo "Somthing going wrong. Please Contact Site administrator";
+	}
+}
+
+
 }

@@ -5,15 +5,14 @@
                 class="logo-name"><?php echo $mainPage;?></span>
             </a>
           </div>
+            <?php if(strlen($this->session->userdata('image'))>0){
+              $image = $this->session->userdata("image");
+              }else{
+              	$image="default.jpg";
+              }?>
           <div class="sidebar-user">
             <div class="sidebar-user-picture">
-              <?php if(strlen($this->session->userdata('image'))>0){?>
-              <img alt="image" src="<?php echo base_url();?>assets/img/<?php echo $this->session->userdata('image');?>"
-              <?php }else {?>
-             
-              <img alt="image" src="<?php echo base_url();?>assets/img/default.jpg
-              
-              <?php }?>
+            	<img alt="image" src="<?php echo base_url();?>assets/img/<?php echo $image;?>"/>
             </div>
             <div class="sidebar-user-details">
               <div class="user-name">
